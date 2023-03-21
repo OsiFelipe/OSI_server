@@ -10,6 +10,7 @@ const routes = [
   require("./routes/proposal.routes"),
   require("./routes/tally.routes"),
   require("./routes/product.routes"),
+  require("./routes/sales.routes"),
 ];
 
 module.exports = function router(app) {

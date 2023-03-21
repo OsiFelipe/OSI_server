@@ -27,8 +27,6 @@ const editProduct = async (req, res) => {
     const {
       params: { idProduct },
     } = req;
-    console.log(idProduct);
-    console.log(req.body);
     const result = await productService.editProduct(idProduct, req.body);
     res.send({ success: true, data: result });
   } catch (error) {

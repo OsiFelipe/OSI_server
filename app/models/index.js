@@ -50,4 +50,20 @@ db.proposal.belongsTo(db.well);
 db.well.hasMany(db.tally, { foreignKey: "wellId" });
 db.tally.belongsTo(db.well);
 
+/**
+ * Well-Sales
+ */
+db.well.hasMany(db.sales, { foreignKey: "wellId" });
+db.sales.belongsTo(db.well);
+
+/**
+ * User-Sales
+ */
+db.user.hasMany(db.sales, { foreignKey: "userId" });
+db.sales.belongsTo(db.user);
+
+/**
+ * Product-Image
+ */
+db.image.belongsToMany(db.product, { through: "imageId" });
 module.exports = db;

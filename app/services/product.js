@@ -1,5 +1,5 @@
 const db = require("../models");
-const { product } = db;
+const { product, image } = db;
 
 const getProduct = async () => {
   try {
@@ -16,7 +16,6 @@ const getProduct = async () => {
 const addProduct = async ({
   partNumber,
   name,
-  description,
   topThreadConnection,
   bottomThreadConnection,
   maxOD,
@@ -28,7 +27,7 @@ const addProduct = async ({
     const result = await product.create({
       partNumber,
       name,
-      description,
+      description: name,
       topThreadConnection,
       bottomThreadConnection,
       maxOD,
@@ -48,7 +47,6 @@ const editProduct = async (
   {
     partNumber,
     name,
-    description,
     topThreadConnection,
     bottomThreadConnection,
     maxOD,
@@ -62,7 +60,7 @@ const editProduct = async (
       {
         partNumber,
         name,
-        description,
+        description: name,
         topThreadConnection,
         bottomThreadConnection,
         maxOD,
