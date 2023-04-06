@@ -5,7 +5,6 @@ const getProduct = async () => {
   try {
     const result = await product.findAll({
       where: { inUse: true },
-      limit: 10,
     });
     return result;
   } catch (error) {

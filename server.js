@@ -9,10 +9,30 @@ const router = require("./app/v1");
 const PORT = process.env.PORT || 4000;
 
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "http://salesapp.odessaseparator.com"],
 };
 
+app.use(cors(corsOptions));
+
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,     Content-Type"
+  );
+  next();
+});
+
 app.use(bodyParser.json({ limit: "50mb" }));
+app.use(express.static("public"));
 app.use(
   bodyParser.urlencoded({
     limit: "50mb",
@@ -29,8 +49,6 @@ db.sequelize
   .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
-
-app.use(cors(corsOptions));
 
 app.use(express.json());
 

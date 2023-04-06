@@ -88,7 +88,6 @@ const deleteTally = async ({ id }) => {
     );
     return result;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

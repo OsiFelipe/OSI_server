@@ -1,5 +1,5 @@
 const db = require("../models");
-const { sales, well, user } = db;
+const { sales, well } = db;
 
 const getSales = async () => {
   try {
@@ -13,31 +13,45 @@ const getSales = async () => {
 };
 
 const addSales = async ({
-  items,
-  description,
-  city,
-  state,
-  country,
-  salesContact,
   orderDate,
-  deliveryDate,
-  deliveryTime,
-  wellId,
+  quoteNumber,
+  client,
+  city,
+  stateZip,
+  country,
+  phoneNumber,
+  email,
+  contact,
+  po,
+  needBy,
+  wellName,
+  directions,
+  deliveryContact,
+  salesmanContact,
   specialNotes,
+  productList,
+  wellId,
   userId,
 }) => {
   try {
     const result = await sales.create({
-      items,
-      description,
-      city,
-      state,
-      country,
-      salesContact,
       orderDate,
-      deliveryDate,
-      deliveryTime,
+      quoteNumber,
+      client,
+      city,
+      stateZip,
+      country,
+      phoneNumber,
+      email,
+      contact,
+      po,
+      needBy,
+      wellName,
+      directions,
+      deliveryContact,
+      salesmanContact,
       specialNotes,
+      productList,
       wellId,
       userId,
     });
@@ -47,36 +61,61 @@ const addSales = async ({
   }
 };
 
+const getSaleById = async ({ id }) => {
+  try {
+    const result = await sales.findByPk(id);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const editSales = async (
   idSales,
   {
-    items,
-    description,
-    city,
-    state,
-    country,
-    salesContact,
     orderDate,
-    deliveryDate,
-    deliveryTime,
-    wellId,
+    quoteNumber,
+    client,
+    city,
+    stateZip,
+    country,
+    phoneNumber,
+    email,
+    contact,
+    po,
+    needBy,
+    wellName,
+    directions,
+    deliveryContact,
+    salesmanContact,
     specialNotes,
+    productList,
+    wellId,
+    userId,
   }
 ) => {
   try {
     const result = await sales.update(
       {
-        items,
-        description,
-        city,
-        state,
-        country,
-        salesContact,
         orderDate,
-        deliveryDate,
-        deliveryTime,
-        wellId,
+        quoteNumber,
+        client,
+        city,
+        stateZip,
+        country,
+        phoneNumber,
+        email,
+        contact,
+        po,
+        needBy,
+        wellName,
+        directions,
+        deliveryContact,
+        salesmanContact,
         specialNotes,
+        productList,
+        wellId,
+        userId,
       },
       {
         where: { id: idSales },
@@ -90,6 +129,7 @@ const editSales = async (
 
 module.exports = {
   getSales,
+  getSaleById,
   editSales,
   addSales,
 };

@@ -8,40 +8,56 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         autoIncrement: true,
       },
-      description: {
+      orderDate: {
+        type: Sequelize.DATE,
+      },
+      quoteNumber: {
+        type: Sequelize.STRING,
+      },
+      client: {
         type: Sequelize.STRING,
       },
       city: {
         type: Sequelize.STRING,
       },
-      state: {
+      stateZip: {
         type: Sequelize.STRING,
-        default: "TX",
       },
       country: {
         type: Sequelize.STRING,
-        default: "USA",
       },
-      salesContact: {
+      phoneNumber: {
         type: Sequelize.STRING,
       },
-      orderDate: {
+      email: {
+        type: Sequelize.STRING,
+      },
+      contact: {
+        type: Sequelize.STRING,
+      },
+      po: {
+        type: Sequelize.STRING,
+      },
+      needBy: {
         type: Sequelize.DATE,
       },
-      deliveryDate: {
-        type: Sequelize.DATE,
+      wellName: {
+        type: Sequelize.STRING,
       },
-      deliveryTime: {
+      directions: {
+        type: Sequelize.STRING,
+      },
+      deliveryContact: {
+        type: Sequelize.STRING,
+      },
+      salesmanContact: {
         type: Sequelize.STRING,
       },
       specialNotes: {
         type: Sequelize.STRING,
       },
-      items: {
+      productList: {
         type: Sequelize.JSONB,
-      },
-      sent: {
-        type: Sequelize.BOOLEAN,
       },
     },
     {

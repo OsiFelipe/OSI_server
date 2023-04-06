@@ -63,7 +63,9 @@ db.user.hasMany(db.sales, { foreignKey: "userId" });
 db.sales.belongsTo(db.user);
 
 /**
- * Product-Image
+ * User-Sales
  */
-db.image.belongsToMany(db.product, { through: "imageId" });
+db.well.hasMany(db.sales, { foreignKey: "wellId" });
+db.sales.belongsTo(db.well);
+
 module.exports = db;

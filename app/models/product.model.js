@@ -41,7 +41,11 @@ module.exports = (sequelize, Sequelize) => {
       weight: {
         type: Sequelize.FLOAT,
       },
-      imageId: {
+      imagePath: {
+        type: Sequelize.STRING,
+        default: null,
+      },
+      size: {
         type: Sequelize.INTEGER,
         default: null,
       },

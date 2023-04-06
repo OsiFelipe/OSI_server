@@ -1,7 +1,4 @@
 "use strict";
-var fs = require("fs");
-var path = require("path");
-var basename = path.basename(__filename);
 
 const routes = [
   require("./routes/client.routes"),
@@ -11,6 +8,7 @@ const routes = [
   require("./routes/tally.routes"),
   require("./routes/product.routes"),
   require("./routes/sales.routes"),
+  require("./routes/test.routes"),
 ];
 
 module.exports = function router(app) {

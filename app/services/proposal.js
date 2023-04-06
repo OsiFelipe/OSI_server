@@ -1,5 +1,5 @@
 const db = require("../models");
-const { proposal, tally, client, product, well, tallyProposal } = db;
+const { proposal, client, product, well } = db;
 
 const getProposal = async () => {
   try {
@@ -75,6 +75,7 @@ const addProposal = async ({
   basicInfo,
   tallyDesign,
   wbdDesign,
+  wellboreImage,
   solution: {
     sandSolution,
     gasSolution,
@@ -97,7 +98,8 @@ const addProposal = async ({
       sandImage,
       gasImage,
       chemImage,
-      wbdDesign: wbdDesign,
+      wellboreImage,
+      wbdDesign,
       date: new Date(),
       active: true,
     });
@@ -107,7 +109,23 @@ const addProposal = async ({
   }
 };
 
-const editProposal = async ({ id }, { basicInfo, tallyDesign, wbdDesign }) => {
+const editProposal = async (
+  { id },
+  {
+    basicInfo,
+    tallyDesign,
+    wbdDesign,
+    wellboreImage,
+    solution: {
+      sandSolution,
+      gasSolution,
+      chemSolution,
+      sandImage,
+      gasImage,
+      chemImage,
+    },
+  }
+) => {
   try {
     const result = await proposal.update(
       {
@@ -117,6 +135,13 @@ const editProposal = async ({ id }, { basicInfo, tallyDesign, wbdDesign }) => {
         wellId: basicInfo.well.id,
         tallyDesign,
         wbdDesign,
+        sandSolution,
+        gasSolution,
+        chemSolution,
+        sandImage,
+        gasImage,
+        chemImage,
+        wellboreImage,
       },
       { where: { id } }
     );

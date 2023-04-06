@@ -50,6 +50,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         default: null,
       },
+      wellboreImage: {
+        type: Sequelize.TEXT,
+        default: null,
+      },
       date: {
         type: Sequelize.DATE,
         allowNull: false,

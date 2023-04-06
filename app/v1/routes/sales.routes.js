@@ -8,7 +8,10 @@ module.exports = (app) => {
     .get(salesController.getSales)
     .post(salesController.addSales);
 
-  router.route("/sales/:idSales").put(salesController.editSales);
+  router
+    .route("/sales/:idSales")
+    .get(salesController.getSaleById)
+    .put(salesController.editSales);
 
   app.use(process.env.URI_API, router);
 };

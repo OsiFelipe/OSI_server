@@ -41,7 +41,6 @@ const editWell = async (req, res) => {
     const {
       params: { idWell },
     } = req;
-    console.log(req.body);
     const result = await wellService.editWell(idWell, req.body);
     res.send({ success: true, data: result });
   } catch (error) {
