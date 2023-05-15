@@ -38,16 +38,27 @@ module.exports = (sequelize, Sequelize) => {
       chemSolution: {
         type: Sequelize.BOOLEAN,
       },
-      sandImage: {
-        type: Sequelize.TEXT,
+      pressureSolution: {
+        type: Sequelize.BOOLEAN,
+      },
+      simulator: {
+        type: Sequelize.JSONB,
         default: null,
       },
-      gasImage: {
-        type: Sequelize.TEXT,
+      sandSimulator: {
+        type: Sequelize.JSONB,
         default: null,
       },
-      chemImage: {
-        type: Sequelize.TEXT,
+      gasSimulator: {
+        type: Sequelize.JSONB,
+        default: null,
+      },
+      chemSimulator: {
+        type: Sequelize.JSONB,
+        default: null,
+      },
+      pressureSimulator: {
+        type: Sequelize.JSONB,
         default: null,
       },
       wellboreImage: {

@@ -39,6 +39,25 @@ const getProposalById = async (req, res) => {
   }
 };
 
+const getInfoSolTechProposalById = async (req, res) => {
+  try {
+    const {
+      params: { idProposal },
+    } = req;
+    if (idProposal === "undefined") {
+      throw "Missing Property";
+    }
+    const result = await proposalService.getInfoSolTechProposalById({
+      id: idProposal,
+    });
+    res.send({ success: true, data: result });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ success: false, data: { error: error?.message || error } });
+  }
+};
+
 const getInfoTechProposal = async (req, res) => {
   try {
     const result = await proposalService.getInfoTechProposal();
@@ -100,6 +119,7 @@ module.exports = {
   getProposalById,
   getProposalDetail,
   getInfoTechProposal,
+  getInfoSolTechProposalById,
   addProposal,
   editProposal,
   deleteProposal,

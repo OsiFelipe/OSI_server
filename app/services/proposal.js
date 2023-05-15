@@ -1,5 +1,5 @@
 const db = require("../models");
-const { proposal, client, product, well } = db;
+const { proposal, client, product, well, customTool } = db;
 
 const getProposal = async () => {
   try {
@@ -40,10 +40,30 @@ const getProposalById = async ({ id }) => {
         sandSolution: foundProposal.sandSolution,
         gasSolution: foundProposal.gasSolution,
         chemSolution: foundProposal.chemSolution,
-        sandImage: foundProposal.sandImage,
-        gasImage: foundProposal.gasImage,
-        chemImage: foundProposal.chemImage,
+        pressureSolution: foundProposal.pressureSolution,
+        sandSimulator: foundProposal.sandSimulator,
+        gasSimulator: foundProposal.gasSimulator,
+        chemSimulator: foundProposal.chemSimulator,
+        pressureSimulator: foundProposal.pressureSimulator,
       },
+    };
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getInfoSolTechProposalById = async ({ id }) => {
+  try {
+    const foundProposal = await proposal.findByPk(id, { raw: true });
+    const result = {
+      sandSolution: foundProposal.sandSolution,
+      gasSolution: foundProposal.gasSolution,
+      chemSolution: foundProposal.chemSolution,
+      sandSimulator: foundProposal.sandSimulator,
+      gasSimulator: foundProposal.gasSimulator,
+      chemSimulator: foundProposal.chemSimulator,
+      simulator: foundProposal.simulator,
     };
     return result;
   } catch (error) {
@@ -62,9 +82,13 @@ const getInfoTechProposal = async () => {
       where: { inUse: true },
       order: [["id", "ASC"]],
     });
+    const customTools = await customTool.findAll({
+      order: [["name", "ASC"]],
+    });
     return {
       clients,
       products,
+      customTools,
     };
   } catch (error) {
     throw error;
@@ -76,13 +100,16 @@ const addProposal = async ({
   tallyDesign,
   wbdDesign,
   wellboreImage,
+  simulator,
   solution: {
     sandSolution,
     gasSolution,
     chemSolution,
-    sandImage,
-    gasImage,
-    chemImage,
+    pressureSolution,
+    sandSimulator,
+    gasSimulator,
+    chemSimulator,
+    pressureSimulator,
   },
 }) => {
   try {
@@ -92,12 +119,15 @@ const addProposal = async ({
       basicInfo,
       wellId: basicInfo.well.id,
       tallyDesign,
+      simulator,
       sandSolution,
       gasSolution,
       chemSolution,
-      sandImage,
-      gasImage,
-      chemImage,
+      pressureSolution,
+      sandSimulator,
+      gasSimulator,
+      chemSimulator,
+      pressureSimulator,
       wellboreImage,
       wbdDesign,
       date: new Date(),
@@ -116,13 +146,16 @@ const editProposal = async (
     tallyDesign,
     wbdDesign,
     wellboreImage,
+    simulator,
     solution: {
       sandSolution,
       gasSolution,
       chemSolution,
-      sandImage,
-      gasImage,
-      chemImage,
+      pressureSolution,
+      sandSimulator,
+      gasSimulator,
+      chemSimulator,
+      pressureSimulator,
     },
   }
 ) => {
@@ -135,13 +168,16 @@ const editProposal = async (
         wellId: basicInfo.well.id,
         tallyDesign,
         wbdDesign,
+        simulator,
         sandSolution,
         gasSolution,
         chemSolution,
-        sandImage,
-        gasImage,
-        chemImage,
+        pressureSolution,
+        sandSimulator,
+        gasSimulator,
+        chemSimulator,
         wellboreImage,
+        pressureSimulator,
       },
       { where: { id } }
     );
@@ -168,6 +204,7 @@ const deleteProposal = async ({ id }) => {
 module.exports = {
   getProposal,
   getProposalById,
+  getInfoSolTechProposalById,
   getProposalDetail,
   editProposal,
   addProposal,
