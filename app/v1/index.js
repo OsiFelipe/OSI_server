@@ -9,6 +9,7 @@ const routes = [
   require("./routes/product.routes"),
   require("./routes/sales.routes"),
   require("./routes/customTool.routes"),
+  require("./routes/login.routes"),
   require("./routes/test.routes"),
 ];
 

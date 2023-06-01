@@ -35,7 +35,6 @@ const editClient = async (idClient, { name }) => {
       { where: { id: idClient } }
     );
     return result;
-    return result;
   } catch (error) {
     throw error;
   }
