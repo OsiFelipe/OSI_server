@@ -14,6 +14,21 @@ const getClient = async () => {
   }
 };
 
+const getClientDetail = async (id) => {
+  try {
+    const result = await client.findOne({
+      where: { id },
+      include: {
+        model: well,
+        order: [["name", "ASC"]],
+      },
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const addClient = async ({ name }) => {
   try {
     const result = await client.create({
@@ -56,6 +71,7 @@ const deleteClient = async (id) => {
 
 module.exports = {
   getClient,
+  getClientDetail,
   editClient,
   addClient,
   deleteClient,

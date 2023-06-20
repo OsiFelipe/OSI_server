@@ -1,5 +1,5 @@
 const db = require("../models");
-const { well, client } = db;
+const { well, client, proposal, tally } = db;
 
 const getWell = async () => {
   try {
@@ -15,6 +15,23 @@ const getWell = async () => {
 const getWellByClientId = async (clientId) => {
   try {
     const result = await well.findAll({ where: { clientId } });
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getWellDetail = async (id) => {
+  try {
+    const result = await well.findOne({
+      where: { id, active: true },
+      include: [
+        {
+          model: proposal,
+        },
+        { model: tally },
+      ],
+    });
     return result;
   } catch (error) {
     throw error;
@@ -69,6 +86,7 @@ const deleteWell = async (id) => {
 
 module.exports = {
   getWell,
+  getWellDetail,
   getWellByClientId,
   editWell,
   addWell,

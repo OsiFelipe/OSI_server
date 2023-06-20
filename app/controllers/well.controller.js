@@ -25,6 +25,20 @@ const getWellByClientId = async (req, res) => {
   }
 };
 
+const getWellDetail = async (req, res) => {
+  try {
+    const {
+      params: { idWell },
+    } = req;
+    const result = await wellService.getWellDetail(idWell);
+    res.send({ success: true, data: result });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ success: false, data: { error: error?.message || error } });
+  }
+};
+
 const addWell = async (req, res) => {
   try {
     const result = await wellService.addWell(req.body);
@@ -69,6 +83,7 @@ const deleteWell = async (req, res) => {
 
 module.exports = {
   getWell,
+  getWellDetail,
   getWellByClientId,
   addWell,
   editWell,

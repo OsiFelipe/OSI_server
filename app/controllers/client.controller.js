@@ -11,6 +11,20 @@ const getClient = async (req, res) => {
   }
 };
 
+const getClientDetail = async (req, res) => {
+  try {
+    const {
+      params: { idClient },
+    } = req;
+    const result = await clientService.getClientDetail(idClient);
+    res.send({ success: true, data: result });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ success: false, data: { error: error?.message || error } });
+  }
+};
+
 const addClient = async (req, res) => {
   try {
     const result = await clientService.addClient(req.body);
@@ -55,6 +69,7 @@ const deleteClient = async (req, res) => {
 
 module.exports = {
   getClient,
+  getClientDetail,
   addClient,
   editClient,
   deleteClient,

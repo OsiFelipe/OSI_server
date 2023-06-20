@@ -15,5 +15,7 @@ module.exports = (app) => {
 
   router.route("/well/client/:clientId").get(wellController.getWellByClientId);
 
+  router.route("/well-detail/:idWell").get(wellController.getWellDetail);
+
   app.use(process.env.URI_API, router);
 };
